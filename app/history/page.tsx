@@ -85,18 +85,18 @@ export default function HistoryPage() {
   return (
     <div className="container max-w-4xl mx-auto px-4 py-12">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">你的过去</h1>
+        <h1 className="text-3xl font-bold">历史创作</h1>
         <div className="flex items-center gap-2">
           <Link href="/write">
             <Button className="h-9">
               <Pencil className="mr-2 h-4 w-4" />
-              重新画图
+              新建创作
             </Button>
           </Link>
           <Link href="/">
             <Button variant="outline" className="h-9">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              返回主页
+              返回首页
             </Button>
           </Link>
         </div>
