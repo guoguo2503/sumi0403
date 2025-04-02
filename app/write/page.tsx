@@ -154,11 +154,16 @@ export default function WritePage() {
     setPendingContent(content);
     
     // 预先分析情绪，方便在对话框中展示
-    const emotion = analyzeEmotion(content);
-    setDominantEmotion(emotion);
-    
-    // 显示情绪画廊选择对话框
-    setShowGalleryDialog(true);
+    analyzeEmotion(content).then(result => {
+      setDominantEmotion(result.emotion);
+      
+      // 显示情绪画廊选择对话框
+      setShowGalleryDialog(true);
+    }).catch(error => {
+      console.error("分析情绪时出错:", error);
+      setDominantEmotion("平静"); // 出错时使用默认情绪
+      setShowGalleryDialog(true);
+    });
   };
 
   const saveCreation = async (generateGallery: boolean) => {
@@ -175,8 +180,14 @@ export default function WritePage() {
         
         try {
           // 使用AI生成图像 - 现在是异步操作
-          const generatedImageUrl = await generateImageFromText(pendingContent);
-          imageUrl = generatedImageUrl;
+          const generatedImage = await generateImageFromText(pendingContent);
+          if (generatedImage.data && generatedImage.data.data && generatedImage.data.data.length > 0 && generatedImage.data.data[0].b64_json) {
+            imageUrl = `data:image/jpeg;base64,${generatedImage.data.data[0].b64_json}`;
+          } else {
+            // 使用更简单的备用图片URL
+            const seed = Date.now();
+            imageUrl = `https://picsum.photos/seed/error-${seed}/800/600`;
+          }
           console.log("生成的AI图片URL:", imageUrl);
         } catch (error) {
           console.error("生成图片时出错:", error);

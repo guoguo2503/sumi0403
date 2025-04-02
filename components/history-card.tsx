@@ -30,7 +30,12 @@ const emotionNames: Record<string, string> = {
   'confused': '困惑',
   'hopeful': '希望',
   'determined': '坚定',
-  'peaceful': '平和'
+  'peaceful': '平和',
+  'angry': '愤怒',
+  'disappointed': '失望',
+  'grateful': '感激',
+  'proud': '自豪',
+  'lonely': '孤独'
 };
 
 // 情绪类型映射到颜色
@@ -44,7 +49,12 @@ const emotionColors: Record<string, string> = {
   'confused': 'bg-purple-100 text-purple-700',
   'hopeful': 'bg-emerald-100 text-emerald-700',
   'determined': 'bg-sky-100 text-sky-700',
-  'peaceful': 'bg-green-100 text-green-700'
+  'peaceful': 'bg-green-100 text-green-700',
+  'angry': 'bg-rose-100 text-rose-700',
+  'disappointed': 'bg-slate-100 text-slate-700',
+  'grateful': 'bg-teal-100 text-teal-700',
+  'proud': 'bg-fuchsia-100 text-fuchsia-700',
+  'lonely': 'bg-violet-100 text-violet-700'
 };
 
 export function HistoryCard({ id, content, prompt, date, image, hasGallery, emotion }: HistoryCardProps) {
@@ -129,7 +139,12 @@ export function HistoryCard({ id, content, prompt, date, image, hasGallery, emot
       'confused': 'bg-purple-50',
       'hopeful': 'bg-emerald-50',
       'determined': 'bg-sky-50',
-      'peaceful': 'bg-green-50'
+      'peaceful': 'bg-green-50',
+      'angry': 'bg-rose-50',
+      'disappointed': 'bg-slate-50',
+      'grateful': 'bg-teal-50',
+      'proud': 'bg-fuchsia-50',
+      'lonely': 'bg-violet-50'
     };
     
     return emotion && colorMap[emotion] ? colorMap[emotion] : 'bg-gray-50';
